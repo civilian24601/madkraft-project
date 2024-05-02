@@ -4,7 +4,7 @@ import React from 'react';
 function Community() {
   return (
     <div id="community">
-      <h1>Community Engagement</h1>
+      <h1>Community Tickles</h1>
       {/* Placeholder for community interaction */}
       <div>
         <p>Manage chatbots and engage your readers here.</p>

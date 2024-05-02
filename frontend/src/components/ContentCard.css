@@ -1,0 +1,46 @@
+/* frontend/src/components/ContentCard.css */
+
+.content-card {
+    border: 1px solid #ddd; /* Add a border for separation */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Add padding for spacing */
+    margin-bottom: 20px; /* Add margin between cards */
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  .content-card h2 {
+    font-size: 1.2rem; /* Adjust heading font size */
+    margin-top: 0; /* Remove top margin */
+  }
+  
+  .content-card p {
+    margin-bottom: 10px; /* Add bottom margin for paragraphs */
+  }
+  
+  .media-preview {
+    /* Add styling for media preview (e.g., image or video) */
+    /* Placeholder content for media preview */
+  width: 100px;
+  height: 100px;
+  background-color: #eee;
+  }
+  
+  .additional-details {
+    /* Add styling for additional details (e.g., metadata) */
+    /* Placeholder content for additional details */
+  margin-top: 10px;
+  background-color: #f5f5f5;
+  padding: 10px;
+    
+    
+  }
+  
+  .actions {
+    margin-top: 10px; /* Add top margin for action buttons */
+  }
+  
+  .actions button {
+    margin-right: 10px; /* Add right margin for buttons */
+  }
+  

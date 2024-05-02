@@ -6,25 +6,62 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     border-radius: 10px; /* Rounded corners */
     margin-right: 20px; /* Add space between sidebar and main content */
-  }
-  
-  .Sidebar h2 {
+}
+
+.Sidebar h2 {
     margin-top: 0;
     font-size: 1.5em; /* Larger font for heading */
-  }
-  
-  .Sidebar ul {
+}
+
+.Sidebar ul {
     list-style: none;
     padding: 0;
-  }
-  
-  .Sidebar li {
+}
+
+.Sidebar li {
     margin: 15px 0; /* Add vertical spacing */
-  }
-  
-  .Sidebar a {
+}
+
+.Sidebar a {
     text-decoration: none;
     color: #333; /* Slightly lighter for readability */
     font-weight: bold; /* Bold links */
-  }
-  
+}
+
+/* Article Proposal */
+.article-proposal {
+    margin-top: 20px;
+}
+
+.article-proposal h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.article-proposal p {
+    margin-bottom: 10px;
+}
+
+.article-proposal .actions button {
+    margin-right: 10px;
+}
+
+/* Video Thumbnail */
+.video-thumbnail {
+    margin-bottom: 20px;
+}
+
+.video-thumbnail img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.video-thumbnail h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.video-thumbnail p {
+    margin-bottom: 10px;
+}

@@ -1,60 +1,83 @@
+// Import required modules
 const express = require('express');
+const youtubeSearch = require('youtube-search');
+const axios = require('axios'); // Import axios for API requests
 const generateContent = require('./generateContent');
-const app = express();
 const logger = require('./logger');
+
+// Load API keys from .env
+require('dotenv').config();
+const youtubeApiKey = process.env.YOUTUBE_API_KEY;
+
+// Import the route handlers
+const curationRoutes = require('./routes/curation');
+const dashboardRoutes = require('./routes/dashboard');
+
+// Initialize the Express app
+const app = express();
 
 // Middleware to log incoming requests
 const logRequest = (req, res, next) => {
-  logger.info(`${req.method} ${req.originalUrl}`, {
-    body: req.body,
-    headers: req.headers
-  });
-  next();
+    logger.info(`${req.method} ${req.originalUrl}`, { body: req.body });
+    next();
 };
-
-// Middleware to parse JSON request bodies
-app.use(express.json());
-
-// Middleware to validate and sanitize request body
-const validateRequestBody = (req, res, next) => {
-  const { prompt, max_tokens } = req.body;
-
-  // Check if prompt and max_tokens are present and valid
-  if (!prompt || typeof prompt !== 'string' || prompt.trim().length === 0) {
-    return res.status(400).json({ error: 'Prompt is required and must be a non-empty string' });
-  }
-  if (!max_tokens || typeof max_tokens !== 'number' || max_tokens <= 0) {
-    return res.status(400).json({ error: 'Max_tokens is required and must be a positive number' });
-  }
-
-  // Sanitize prompt (if needed)
-  req.body.prompt = prompt.trim(); // Example: Remove leading/trailing whitespace
-
-  next();
-};
-
-// Apply logging middleware
 app.use(logRequest);
 
-// Apply validation and sanitization middleware
-app.use(validateRequestBody);
+// Route to search for YouTube videos
+app.get('/search/youtube', async (req, res) => {
+    const query = req.query.q || 'latest music'; // Default query if not provided
+    try {
+        // Make API request to YouTube Data API
+        const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+            params: {
+                key: youtubeApiKey,
+                part: 'snippet',
+                q: query,
+                type: 'video',
+                maxResults: 5, // Adjust number of results as needed
+            },
+        });
 
-// Define routes
-app.get('/', (req, res) => {
-  res.send('Welcome to the MadKraft Content Generator!');
+        // Extract relevant video information from API response
+        const videos = response.data.items.map(item => ({
+            id: item.id.videoId,
+            title: item.snippet.title,
+            description: item.snippet.description,
+            thumbnails: item.snippet.thumbnails,
+        }));
+
+        // Propose article ideas for the selected videos
+        const articleIdeas = await generateArticleIdeas(videos);
+
+        // Include the generated article ideas along with the reference videos
+        const dataWithIdeas = videos.map((video, index) => ({
+            ...video,
+            articleIdea: articleIdeas[index],
+        }));
+
+        // Send the analyzed video data and generated article ideas as a JSON response
+        res.json(dataWithIdeas);
+    } catch (error) {
+        console.error('Error searching YouTube videos:', error);
+        res.status(500).json({ error: 'Failed to search YouTube videos' });
+    }
 });
 
-app.post('/generate', async (req, res) => {
-  try {
-    const { prompt, max_tokens } = req.body;
-    const content = await generateContent(prompt, max_tokens);
-    res.json({ content });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to generate content' });
-  }
-});
+// Function to generate article ideas for the selected videos
+async function generateArticleIdeas(videos) {
+    // Placeholder function to generate article ideas using AI
+    // You can replace this with your actual implementation
+    const articleIdeas = videos.map(video => {
+        // For each video, generate a sample article idea
+        return `An in-depth review of the video titled "${video.title}"`;
+    });
+    return articleIdeas;
+}
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Add curation and dashboard routes
+app.use('/curation', curationRoutes);
+app.use('/dashboard', dashboardRoutes);
+
+// Start server
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server is running on port ${port}`));

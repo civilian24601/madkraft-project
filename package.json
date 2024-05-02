@@ -13,6 +13,7 @@
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "winston": "^3.13.0"
+    "winston": "^3.13.0",
+    "youtube-search": "^1.1.6"
   }
 }

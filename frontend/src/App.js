@@ -1,9 +1,26 @@
 // frontend/src/App.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
+import CuratedContent from './components/CuratedContent'; // Import the CuratedContent component
 import './App.css';
 
 function App() {
+  // State to store the curated content
+  const [curatedContent, setCuratedContent] = useState(null);
+
+  // Mock data for testing
+  const mockCuratedContent = {
+    title: 'Sample Curated Content',
+    description: 'This is a sample curated content description.',
+    // Add more data fields as needed
+  };
+
+  // useEffect hook to fetch curated content from backend
+  useEffect(() => {
+    // For testing, setting mock data
+    setCuratedContent(mockCuratedContent);
+  }, []); // Empty dependency array as this effect doesn't depend on any props or state
+
   return (
     <div className="App">
       <Sidebar />
@@ -11,18 +28,23 @@ function App() {
         <h1>MadKraft Dashboard</h1>
         
         {/* Content Curation Card */}
-        <div className="card" id="curation">
-          <h2>Content Curation</h2>
-          <div className="media-box">Video/Track Box</div>
-          <div className="content-details">
-            <p>Proposed article/review idea goes here.</p>
-            <div className="actions">
-              <button>Approve</button>
-              <button>Edit</button>
-              <button>Reject</button>
+        {curatedContent && (
+          <div className="card" id="curation">
+            <h2>Content Curation</h2>
+            <div className="media-box">
+              <p>{curatedContent.title}</p>
+              <p>{curatedContent.description}</p>
+            </div>
+            <div className="content-details">
+              {/* Add buttons for action steps */}
+              <div className="actions">
+                <button>Approve</button>
+                <button>Edit</button>
+                <button>Reject</button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Affiliate Management Card */}
         <div className="card" id="affiliate-management">
