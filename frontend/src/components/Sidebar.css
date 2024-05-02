@@ -1,0 +1,30 @@
+/* frontend/src/components/Sidebar.css */
+.Sidebar {
+    width: 250px; /* Slightly wider */
+    background-color: #ffffff; /* Pure white */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    margin-right: 20px; /* Add space between sidebar and main content */
+  }
+  
+  .Sidebar h2 {
+    margin-top: 0;
+    font-size: 1.5em; /* Larger font for heading */
+  }
+  
+  .Sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .Sidebar li {
+    margin: 15px 0; /* Add vertical spacing */
+  }
+  
+  .Sidebar a {
+    text-decoration: none;
+    color: #333; /* Slightly lighter for readability */
+    font-weight: bold; /* Bold links */
+  }
+  

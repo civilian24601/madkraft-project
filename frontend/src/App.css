@@ -1,0 +1,68 @@
+/* frontend/src/App.css */
+.App {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+  background-color: #f0f2f5;
+}
+
+.card {
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.media-box {
+  background-color: #d1e7dd; /* Light green to represent media */
+  border-radius: 10px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.content-details p {
+  margin-bottom: 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.affiliate-list,
+.product-list,
+.comment-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.affiliate-list li,
+.product-list li,
+.comment-list li {
+  margin-bottom: 10px;
+}
+
+.comment-list p {
+  margin: 5px 0;
+}
+
+.actions button.delete {
+  background-color: #dc3545;
+}
